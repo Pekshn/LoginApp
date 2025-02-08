@@ -13,8 +13,8 @@ struct HomeView: View {
     var body: some View {
         VStack {
             Text("Welcome Home!")
-            .navigationTitle("Home Screen")
-        }
+            .navigationTitle("Home")
+        } //: VStack
     }
 }
 

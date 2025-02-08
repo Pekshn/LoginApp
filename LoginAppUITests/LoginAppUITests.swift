@@ -7,37 +7,47 @@
 
 import XCTest
 
-final class LoginAppUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+final class WhenUserClicksOnLoginButton: XCTestCase {
+    
+    //MARK: - Properties
+    private var app: XCUIApplication!
+    private var loginPageObject: LoginPageObject!
+    
+    //MARK: - Lifecycle
+    override func setUp() {
+        super.setUp()
+        app = XCUIApplication()
+        loginPageObject = LoginPageObject(app: app)
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+        app.launchEnvironment = ["ENV": "TEST"]
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    //MARK: - Testing methods
+    func test_shouldDisplayErrorMessageForMissingRequiredFields() {
+        loginPageObject.usernameTextField.tap()
+        loginPageObject.usernameTextField.typeText("")
+        loginPageObject.passwordTextField.tap()
+        loginPageObject.passwordTextField.typeText("")
+        loginPageObject.loginButton.tap()
+        XCTAssertEqual(loginPageObject.messageText.label, "Required fields are missing")
+    }
+    
+    func test_shouldNavigateToHomeOnSuccessAuthentication() {
+        loginPageObject.usernameTextField.tap()
+        loginPageObject.usernameTextField.typeText("JohnDoe")
+        loginPageObject.passwordTextField.tap()
+        loginPageObject.passwordTextField.typeText("Password")
+        loginPageObject.loginButton.tap()
+        XCTAssertTrue(loginPageObject.home.waitForExistence(timeout: 0.5))
+    }
+    
+    func test_shouldDisplayErrorMessageForInvalidCredentials() {
+        loginPageObject.usernameTextField.tap()
+        loginPageObject.usernameTextField.typeText("WrongUser")
+        loginPageObject.passwordTextField.tap()
+        loginPageObject.passwordTextField.typeText("WrongPass")
+        loginPageObject.loginButton.tap()
+        XCTAssertEqual(loginPageObject.messageText.label, "Invalid credentials")
     }
 }

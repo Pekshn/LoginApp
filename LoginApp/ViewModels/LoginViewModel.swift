@@ -7,20 +7,13 @@
 
 import Foundation
 
-enum LoginStatus {
-    case none
-    case authenticated
-    case denied
-    case validationFailed
-}
-
 class LoginViewModel: ObservableObject {
     
-    
+    //MARK: - Properties
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var loginStatus: LoginStatus = .none
-    private var service: Webservice
+    private var service: NetworkService
     var errorMessage: String {
         switch loginStatus {
             case .denied:
@@ -32,29 +25,31 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    init(service: Webservice) {
+    //MARK: - Init
+    init(service: NetworkService) {
         self.service = service
     }
+}
+
+//MARK: - Public API
+extension LoginViewModel {
     
     func login() {
-        
         if username.isEmpty || password.isEmpty {
             self.loginStatus = .validationFailed
             return
         }
-        
         service.login(username: username, password: password) { result in
             switch result {
-                case .success():
-                        DispatchQueue.main.async {
-                            self.loginStatus = .authenticated
-                        }
-                case .failure(_):
-                    DispatchQueue.main.async {
-                        self.loginStatus = .denied
-                    }
+            case .success():
+                DispatchQueue.main.async {
+                    self.loginStatus = .authenticated
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self.loginStatus = .denied
+                }
             }
         }
     }
-    
 }

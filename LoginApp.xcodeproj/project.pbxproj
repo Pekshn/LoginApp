@@ -29,9 +29,54 @@
 		94E3653C2D57877D00705269 /* LoginAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		94E3658F2D5790B200705269 /* Exceptions for "LoginApp" folder in "LoginAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/LoginResponse.swift,
+				Models/LoginStatus.swift,
+				Models/NetworkError.swift,
+				Services/Webservice.swift,
+				ViewModels/LoginViewModel.swift,
+			);
+			target = 94E3652E2D57871B00705269 /* LoginAppTests */;
+		};
+		94E365902D5790B200705269 /* Exceptions for "LoginApp" folder in "LoginAppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/LoginResponse.swift,
+				Models/LoginStatus.swift,
+				Models/NetworkError.swift,
+				Services/Webservice.swift,
+				ViewModels/LoginViewModel.swift,
+			);
+			target = 94E3653B2D57877D00705269 /* LoginAppUITests */;
+		};
+		94E3659D2D57924500705269 /* Exceptions for "LoginAppUITests" folder in "LoginApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/MockURLProcotol.swift,
+				Mocks/MockWebService.swift,
+			);
+			target = 94E364E72D57864800705269 /* LoginApp */;
+		};
+		94E3659E2D57924500705269 /* Exceptions for "LoginAppUITests" folder in "LoginAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/MockURLProcotol.swift,
+				Mocks/MockWebService.swift,
+			);
+			target = 94E3652E2D57871B00705269 /* LoginAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		94E364EA2D57864800705269 /* LoginApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				94E3658F2D5790B200705269 /* Exceptions for "LoginApp" folder in "LoginAppTests" target */,
+				94E365902D5790B200705269 /* Exceptions for "LoginApp" folder in "LoginAppUITests" target */,
+			);
 			path = LoginApp;
 			sourceTree = "<group>";
 		};
@@ -42,6 +87,10 @@
 		};
 		94E3653D2D57877D00705269 /* LoginAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				94E3659D2D57924500705269 /* Exceptions for "LoginAppUITests" folder in "LoginApp" target */,
+				94E3659E2D57924500705269 /* Exceptions for "LoginAppUITests" folder in "LoginAppTests" target */,
+			);
 			path = LoginAppUITests;
 			sourceTree = "<group>";
 		};
