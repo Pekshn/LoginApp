@@ -1,0 +1,21 @@
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Run tests"
+  lane :tests do
+    run_tests(
+      devices: ["iPhone 16 Pro"],
+      scheme: "LoginApp",
+      skip_testing: ["LoginAppUITests"]
+    )
+  end
+
+  desc "Build app (for debugging, not exporting)"
+  lane :build do
+    gym(
+      scheme: "LoginApp"
+    )
+  end
+
+end
