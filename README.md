@@ -1,6 +1,5 @@
 # LoginApp
-Description of the LoginApp
-My simple iOS app demonstrating:
+My LoginApp iOS app demonstrating:
   -  Swift UI - Declarative UI framework.
   -  MVVM Architecture - Clean separation of concerns.
   -  WebService – Handling network requests with URLSession.
