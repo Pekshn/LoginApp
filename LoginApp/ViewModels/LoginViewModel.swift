@@ -12,6 +12,7 @@ class LoginViewModel: ObservableObject {
     //MARK: - Properties
     @Published var username: String = ""
     @Published var password: String = ""
+    @Published var isLoading: Bool = false
     @Published var loginStatus: LoginStatus = .none
     private var service: NetworkService
     var errorMessage: String {
@@ -39,14 +40,14 @@ extension LoginViewModel {
             self.loginStatus = .validationFailed
             return
         }
+        isLoading = true
         service.login(username: username, password: password) { result in
-            switch result {
-            case .success():
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                self.isLoading = false
+                switch result {
+                case .success():
                     self.loginStatus = .authenticated
-                }
-            case .failure(_):
-                DispatchQueue.main.async {
+                case .failure(_):
                     self.loginStatus = .denied
                 }
             }

@@ -39,17 +39,26 @@ struct ContentView: View {
                     Button {
                         loginVM.login()
                     } label: {
-                        Text("Login")
-                            .foregroundColor(.orange)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 50)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(lineWidth: 2)
-                                    .foregroundColor(.white)
-                            )
-                            .accessibilityIdentifier("loginButton")
+                        Group {
+                            if !loginVM.isLoading {
+                                Text("Login")
+                                    .frame(width: 150, height: 50)
+                                    .foregroundColor(.orange)
+                            } else {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
+                                    .frame(width: 150, height: 50)
+                                    .tint(.orange)
+                            }
+                        }
+                        .accessibilityIdentifier("loginButton")
                     } //: Button
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(.white)
+                    )
+                    .disabled(loginVM.isLoading)
                     Spacer()
                 } //: HStack
                 

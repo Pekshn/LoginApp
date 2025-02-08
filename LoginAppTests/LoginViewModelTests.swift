@@ -32,8 +32,10 @@ class LoginViewModelTests: XCTestCase {
         viewModel.password = "Password"
         let expectation = self.expectation(description: "Login success")
         viewModel.login()
+        XCTAssertTrue(viewModel.isLoading, "Login request should set isLoading to true")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             XCTAssertEqual(self.viewModel.loginStatus, .authenticated)
+            XCTAssertFalse(self.viewModel.isLoading, "Login response should set isLoading to false")
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1.0)
@@ -44,8 +46,10 @@ class LoginViewModelTests: XCTestCase {
         viewModel.password = "WrongPass"
         let expectation = self.expectation(description: "Login fails")
         viewModel.login()
+        XCTAssertTrue(viewModel.isLoading, "Login request should set isLoading to true")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             XCTAssertEqual(self.viewModel.loginStatus, .denied)
+            XCTAssertFalse(self.viewModel.isLoading, "Login response should set isLoading to false")
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1.0)
@@ -57,5 +61,12 @@ class LoginViewModelTests: XCTestCase {
         viewModel.login()
         XCTAssertEqual(viewModel.loginStatus, .validationFailed)
         XCTAssertEqual(viewModel.errorMessage, "Required fields are missing")
+    }
+    
+    func test_isLoadingResetsOnValidationFailure() {
+        viewModel.username = ""
+        viewModel.password = ""
+        viewModel.login()
+        XCTAssertFalse(viewModel.isLoading, "IsLoading should be false if validation fails")
     }
 }

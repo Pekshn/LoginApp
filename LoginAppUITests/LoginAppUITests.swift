@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class WhenUserClicksOnLoginButton: XCTestCase {
+final class LoginAppUITests: XCTestCase {
     
     //MARK: - Properties
     private var app: XCUIApplication!
@@ -24,7 +24,7 @@ final class WhenUserClicksOnLoginButton: XCTestCase {
     }
     
     //MARK: - Testing methods
-    func test_shouldDisplayErrorMessageForMissingRequiredFields() {
+    func test_loginTappedShouldDisplayErrorMessageForMissingRequiredFields() {
         loginPageObject.usernameTextField.tap()
         loginPageObject.usernameTextField.typeText("")
         loginPageObject.passwordTextField.tap()
@@ -33,16 +33,22 @@ final class WhenUserClicksOnLoginButton: XCTestCase {
         XCTAssertEqual(loginPageObject.messageText.label, "Required fields are missing")
     }
     
-    func test_shouldNavigateToHomeOnSuccessAuthentication() {
+    func test_loginTappedShouldNavigateToHomeOnSuccessAuthentication() {
         loginPageObject.usernameTextField.tap()
         loginPageObject.usernameTextField.typeText("JohnDoe")
         loginPageObject.passwordTextField.tap()
         loginPageObject.passwordTextField.typeText("Password")
+        XCTAssertTrue(loginPageObject.loginButton.isEnabled, "Login Button should be enabled before first tap")
         loginPageObject.loginButton.tap()
+        if loginPageObject.loginButton.exists {
+            XCTAssertFalse(loginPageObject.loginButton.isEnabled, "Login Button should be disabled when isLoading")
+        } else {
+            print("Login button no longer exists, skipping isEnabled check.")
+        }
         XCTAssertTrue(loginPageObject.home.waitForExistence(timeout: 0.5))
     }
     
-    func test_shouldDisplayErrorMessageForInvalidCredentials() {
+    func test_loginTappedShouldDisplayErrorMessageForInvalidCredentials() {
         loginPageObject.usernameTextField.tap()
         loginPageObject.usernameTextField.typeText("WrongUser")
         loginPageObject.passwordTextField.tap()
