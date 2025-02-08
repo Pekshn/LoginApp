@@ -1,5 +1,7 @@
 # LoginApp
+
 My iOS LoginApp Demonstrating:
+
   -  SwiftUI – Declarative UI framework for building modern iOS apps.
   -  MVVM Architecture – Clean separation of concerns between UI and business logic.
   -  Swift Concurrency – Enhancing structured concurrency with async/await.
