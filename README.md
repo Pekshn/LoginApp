@@ -10,4 +10,4 @@ My iOS LoginApp Demonstrating:
   -  Continuous Integration (CI) – Automating builds and tests.
   -  GitHub Actions – CI/CD pipeline for automatic testing.
 
-📌 Note: No external dependencies – Just download and build. 🚀
+📌 Note: No external dependencies – Just download and build.
