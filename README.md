@@ -1,11 +1,13 @@
 # LoginApp
-My iOS LoginApp demonstrating:
-  -  Swift UI - Declarative UI framework.
-  -  MVVM Architecture - Clean separation of concerns.
-  -  Swift Concurrency – Enhancing structured concurrency with async/await
+My iOS LoginApp Demonstrating:
+  -  SwiftUI – Declarative UI framework for building modern iOS apps.
+  -  MVVM Architecture – Clean separation of concerns between UI and business logic.
+  -  Swift Concurrency – Enhancing structured concurrency with async/await.
   -  WebService – Handling network requests with URLSession.
   -  Dependency Injection – Improving testability and modularity.
   -  Unit & UI Testing – Ensuring code reliability.
-  -  Mocking/URLSession Mocking – Simulating network responses for testing.
-  -  Continuous Integration – Automating builds and tests.
+  -  Mocking / URLSession Mocking – Simulating network responses for testing.
+  -  Continuous Integration (CI) – Automating builds and tests.
   -  GitHub Actions – CI/CD pipeline for automatic testing.
+
+📌 Note: No external dependencies – Just download and build. 🚀
