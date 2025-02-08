@@ -1,5 +1,5 @@
 # LoginApp
-My LoginApp iOS app demonstrating:
+My LoginApp demonstrating:
   -  Swift UI - Declarative UI framework.
   -  MVVM Architecture - Clean separation of concerns.
   -  Swift Concurrency – Enhancing structured concurrency with async/await
