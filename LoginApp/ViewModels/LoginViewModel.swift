@@ -35,22 +35,21 @@ class LoginViewModel: ObservableObject {
 //MARK: - Public API
 extension LoginViewModel {
     
-    func login() {
+    @MainActor
+    func login() async {
         if username.isEmpty || password.isEmpty {
             self.loginStatus = .validationFailed
             return
         }
         isLoading = true
-        service.login(username: username, password: password) { result in
-            DispatchQueue.main.async {
-                self.isLoading = false
-                switch result {
-                case .success():
-                    self.loginStatus = .authenticated
-                case .failure(_):
-                    self.loginStatus = .denied
-                }
-            }
+        defer { isLoading = false }
+        do {
+            try await service.login(username: username, password: password)
+            self.loginStatus = .authenticated
+            self.isLoading = false
+        } catch {
+            self.loginStatus = .denied
+            self.isLoading = false
         }
     }
 }

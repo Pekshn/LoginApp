@@ -10,11 +10,11 @@ import Foundation
 class MockWebService: NetworkService {
     
     //MARK: - Methods
-    func login(username: String, password: String, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+    func login(username: String, password: String) async throws {
         if username == "JohnDoe" && password == "Password" {
-            return completion(.success(()))
+            return
         } else {
-            return completion(.failure(.notAuthenticated))
+            throw NetworkError.notAuthenticated
         }
     }
 }

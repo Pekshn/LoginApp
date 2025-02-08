@@ -37,7 +37,9 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button {
-                        loginVM.login()
+                        Task {
+                            await loginVM.login()
+                        }
                     } label: {
                         Group {
                             if !loginVM.isLoading {
