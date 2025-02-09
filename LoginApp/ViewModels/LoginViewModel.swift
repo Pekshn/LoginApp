@@ -13,6 +13,7 @@ class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var isLoading: Bool = false
+    @Published var isLoggedIn: Bool = false
     @Published var loginStatus: LoginStatus = .none
     private var service: NetworkService
     var errorMessage: String {
@@ -46,9 +47,11 @@ extension LoginViewModel {
         do {
             try await service.login(username: username, password: password)
             self.loginStatus = .authenticated
+            self.isLoggedIn = true
             self.isLoading = false
         } catch {
             self.loginStatus = .denied
+            self.isLoggedIn = false
             self.isLoading = false
         }
     }

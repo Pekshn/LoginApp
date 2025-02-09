@@ -30,7 +30,7 @@ struct ContentView: View {
                     .modifier(TextFieldModifier())
                     .accessibilityIdentifier("usernameTextField")
                 
-                TextField("Password", text: $loginVM.password)
+                SecureField("Password", text: $loginVM.password)
                     .modifier(TextFieldModifier())
                     .accessibilityIdentifier("passwordTextField")
                 
@@ -67,6 +67,7 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Text(loginVM.errorMessage)
+                        .foregroundColor(.red)
                         .accessibilityIdentifier("messageText")
                     Spacer()
                 } //: HStack
@@ -79,7 +80,7 @@ struct ContentView: View {
                 .padding(.horizontal, 30)
                 
             } //: VStack
-            .navigationDestination(isPresented: .constant(loginVM.loginStatus == .authenticated)) {
+            .navigationDestination(isPresented: $loginVM.isLoggedIn) {
                 HomeView()
             } //: navigationDestination
             .padding(.bottom, 100)

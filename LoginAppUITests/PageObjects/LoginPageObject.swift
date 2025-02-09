@@ -23,7 +23,7 @@ class LoginPageObject {
     }
     
     var passwordTextField: XCUIElement {
-        app.textFields["passwordTextField"]
+        app.secureTextFields["passwordTextField"]
     }
     
     var loginButton: XCUIElement {
