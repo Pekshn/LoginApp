@@ -1,6 +1,6 @@
 # LoginApp
 
-My iOS LoginApp Demonstrating:
+LoginApp iOS app covering:
 
   -  SwiftUI – Declarative UI framework for building modern iOS apps.
   -  MVVM Architecture – Clean separation of concerns between UI and business logic.
